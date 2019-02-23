@@ -42,8 +42,8 @@ namespace AdvancedCommandExecutor
                 var _selectedText = _calculatingPermutations[0];
                 Match m = Regex.Match(_selectedText, pattern);
                 if (m.Success)
-                { 
-                  // Get a choice and replace pattern match. Calculate all possible choices.
+                {
+                    // Get a choice and replace pattern match. Calculate all possible choices.
                     string seg = _selectedText.Substring(m.Index + 1, m.Length - 2);
                     string[] choices = seg.Split('|');
                     foreach (var _choice in choices)
@@ -57,8 +57,9 @@ namespace AdvancedCommandExecutor
                         }
                         else
                         {
-                            // There is no more spintax. Final text.
-                            _allPossiblePermutations.Add(_choicedText);
+                            // There is no more spintax. If does not contain in the return list, add the final text to it.
+                            if (!(_allPossiblePermutations.Contains(_choicedText)))
+                                _allPossiblePermutations.Add(_choicedText);
                         }
                     }
                 }
@@ -66,7 +67,8 @@ namespace AdvancedCommandExecutor
                 {
                     // If there is no spintax. All text is the only choice.
                     _calculatingPermutations.Remove(_selectedText);
-                    _allPossiblePermutations.Add(_selectedText);
+                    if (!(_allPossiblePermutations.Contains(_selectedText)))
+                        _allPossiblePermutations.Add(_selectedText);
                 }
             }
             // Return List.
