@@ -52,13 +52,21 @@ namespace AdvancedCommandExecutor
                         _calculatingPermutations.Remove(_selectedText);
                         if (Regex.Match(_choicedText, pattern).Success)
                         {
+                            // There is more spintax inside of the choiced text
                             _calculatingPermutations.Add(_choicedText);
                         }
                         else
                         {
+                            // There is no more spintax. Final text.
                             _allPossiblePermutations.Add(_choicedText);
                         }
                     }
+                }
+                else
+                {
+                    // If there is no spintax. All text is the only choice.
+                    _calculatingPermutations.Remove(_selectedText);
+                    _allPossiblePermutations.Add(_selectedText);
                 }
             }
             // Return List.
