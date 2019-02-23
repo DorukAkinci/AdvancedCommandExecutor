@@ -33,7 +33,7 @@ namespace AdvancedCommandExecutor
             else
                 _input = args[0];
 
-            List<string> _allPossiblePermutations = Spintax.CreateAllPossiblePermutations("echo {TEST|DEMO} {1|2|3}!");
+            List<string> _allPossiblePermutations = Spintax.CreateAllPossiblePermutations(_input);
 
             PrintList(_allPossiblePermutations);
             Console.WriteLine("All possible permutations are listed. Do you want to start the processes.(y/n)");
