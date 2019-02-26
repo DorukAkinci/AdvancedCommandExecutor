@@ -51,8 +51,9 @@ namespace AdvancedCommandExecutor
             {
                 string seg = _sequentialData[0].Substring(m.Index + 1, m.Length - 2);
                 string[] choices = seg.Split('|');
-                for (int i=0; i<_sequentialData.Keys.Count; i++)
+                for (int i = 0; i < _sequentialData.Keys.Count; i++)
                 {
+                    m = Regex.Match(_sequentialData[i], pattern);
                     var _choicedText = _sequentialData[i].Substring(0, m.Index) + choices[i] + _sequentialData[i].Substring(m.Index + m.Length);
                     _sequentialData[i] = _choicedText;
                 }
