@@ -1,9 +1,11 @@
 # AdvancedCommandExecutor
-Starts multiple processes with a single spintax command.
+Starts multiple processes with a single spintax command that works with 2 arguments.
+
+*If there is a single argument that means you have chosen the permutation operation by default*
 
 Usage:
 ```
-AdvancedCommandExecutor.exe --perm "echo Hello {world|humans|coders} !!!"
+AdvancedCommandExecutor.exe "echo Hello {world|humans|coders} !!!"
 ```
 Output: 
 

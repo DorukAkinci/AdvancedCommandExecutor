@@ -32,8 +32,9 @@ namespace AdvancedCommandExecutor
         {
             // Loop over string until all patterns exhausted.
             string pattern = "{[^{}]*}";
+
+            // Dictionary is set for once to understand how many sequential part that we are working on. After then that we will continue to progress with dictionary based operations.
             Dictionary<int, string> _sequentialData = new Dictionary<int, string>();
-            // BIR KERE DICTIONARYI OLUŞTURMAK IÇIN REGEX MATCHLEYIP İŞLEM YAPILMALI. BUNDAN SONRAKİLERDE FOR DÖNGÜSÜ DICTIONARY KEY COUNT ÜZERİNDEN GİDECEK
 
             Match m = Regex.Match(text, pattern);
             if (m.Success)
