@@ -28,22 +28,56 @@ namespace AdvancedCommandExecutor
         static void Main(string[] args)
         {
             string _input;
+            string _operation = "";
+            List<string> _output = new List<string>();
+
             if (args.Count() == 0)
-                _input = "echo {TEST|DEMO} {1|2|3}!";
+            {
+                Console.WriteLine("Default Command is set: AdvancedCommandExecutor --perm \"echo {TEST|DEMO} {1|2}!\"");
+                Console.WriteLine("Also you can use --sequential operation.");
+                _input = "echo {TEST|DEMO} {1|2}!";
+            }
             else
-                _input = args[0];
+            {
+                _operation = args[0];
+                _input = args[1];
+            }
 
-            List<string> _allPossiblePermutations = Spintax.CreateAllPossiblePermutations(_input);
+            switch (_operation)
+            {
+                case "--sequential":
+                case "-sequential":
+                case "--seq":
+                case "-seq":
+                case "--s":
+                case "-s":
+                    _output = Spintax.CreateSequentialList(_input);
+                    break;
 
-            PrintList(_allPossiblePermutations);
+                case "--permutation":
+                case "-permutation":
+                case "--perm":
+                case "-perm":
+                case "--p":
+                case "-p":
+                    _output = Spintax.CreateAllPossiblePermutations(_input);
+                    break;
+
+                default:
+                    Console.WriteLine("Default operation --permutation is selected.");
+                    _output = Spintax.CreateAllPossiblePermutations(_input);
+                    break;
+            }
+
+
+            PrintList(_output);
             Console.WriteLine("All possible permutations are listed. Do you want to start the processes.(y/n)");
 
             if (Console.ReadKey().Key == ConsoleKey.Y)
             {
-                foreach (var _cmd in _allPossiblePermutations)
+                foreach (var _cmd in _output)
                     StartTheProcess(_cmd);
             }
-            Console.ReadKey();
         }
     }
 }

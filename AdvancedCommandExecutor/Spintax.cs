@@ -28,6 +28,41 @@ namespace AdvancedCommandExecutor
             return str;
         }
 
+        internal static List<string> CreateSequentialList(string text)
+        {
+            // Loop over string until all patterns exhausted.
+            string pattern = "{[^{}]*}";
+            Dictionary<int, string> _sequentialData = new Dictionary<int, string>();
+            // BIR KERE DICTIONARYI OLUŞTURMAK IÇIN REGEX MATCHLEYIP İŞLEM YAPILMALI. BUNDAN SONRAKİLERDE FOR DÖNGÜSÜ DICTIONARY KEY COUNT ÜZERİNDEN GİDECEK
+
+            Match m = Regex.Match(text, pattern);
+            if (m.Success)
+            {
+                string seg = text.Substring(m.Index + 1, m.Length - 2);
+                string[] choices = seg.Split('|');
+                for (int i = 0; i < choices.Length; i++)
+                {
+                    var _choicedText = text.Substring(0, m.Index) + choices[i] + text.Substring(m.Index + m.Length);
+                    _sequentialData.Add(i, _choicedText);
+                }
+                m = Regex.Match(_sequentialData[0], pattern);
+            }
+            while (m.Success)
+            {
+                string seg = _sequentialData[0].Substring(m.Index + 1, m.Length - 2);
+                string[] choices = seg.Split('|');
+                for (int i=0; i<_sequentialData.Keys.Count; i++)
+                {
+                    var _choicedText = _sequentialData[i].Substring(0, m.Index) + choices[i] + _sequentialData[i].Substring(m.Index + m.Length);
+                    _sequentialData[i] = _choicedText;
+                }
+                m = Regex.Match(_sequentialData[0], pattern);
+            }
+
+            return _sequentialData.Select(q => q.Value).ToList();
+        }
+
+
         internal static List<string> CreateAllPossiblePermutations(string text)
         {
             string pattern = "{[^{}]*}";
@@ -74,5 +109,7 @@ namespace AdvancedCommandExecutor
             // Return List.
             return _allPossiblePermutations;
         }
+
+
     }
 }
