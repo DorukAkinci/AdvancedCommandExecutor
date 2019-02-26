@@ -71,7 +71,7 @@ namespace AdvancedCommandExecutor
 
 
             PrintList(_output);
-            Console.WriteLine("All possible permutations are listed. Do you want to start the processes.(y/n)");
+            Console.WriteLine("These commands will be executed. Do you want to start the processes.(y/n)");
 
             if (Console.ReadKey().Key == ConsoleKey.Y)
             {
