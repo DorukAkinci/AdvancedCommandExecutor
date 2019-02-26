@@ -39,8 +39,17 @@ namespace AdvancedCommandExecutor
             }
             else
             {
-                _operation = args[0];
-                _input = args[1];
+                // Default operation is set. the program can be used much more easily.
+                if (args.Length == 1)
+                {
+                    _operation = "--permutation";
+                    _input = args[0]; // If there is no operation argument that means all of the argument is the command input data.
+                }
+                else
+                {
+                    _operation = args[0];
+                    _input = args[1];
+                }
             }
 
             switch (_operation)
@@ -69,7 +78,7 @@ namespace AdvancedCommandExecutor
                     break;
             }
 
-
+            // Console output for confirmation.
             PrintList(_output);
             Console.WriteLine("These commands will be executed. Do you want to start the processes.(y/n)");
 
