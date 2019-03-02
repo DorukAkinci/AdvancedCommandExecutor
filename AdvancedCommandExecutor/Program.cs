@@ -52,7 +52,7 @@ namespace AdvancedCommandExecutor
                 }
             }
 
-            switch (_operation)
+            switch (_operation.ToLowerInvariant())
             {
                 case "--sequential":
                 case "-sequential":
